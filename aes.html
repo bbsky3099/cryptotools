@@ -1,19 +1,81 @@
-<header>
-    <h1>AES 加密/解密</h1>
-</header>
-<main>
-    <form id="aesForm">
-        <label for="mode">模式:</label>
-        <select id="mode" required>
-            <option value="encrypt">加密</option>
-            <option value="decrypt">解密</option>
-        </select>
-        <label for="data">输入数据:</label>
-        <textarea id="data" required></textarea>
-        <label for="key">密钥:</label>
-        <input type="text" id="key" required>
-        <button type="submit">执行</button>
-    </form>
-    <div id="result"></div>
-</main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AES 加密/解密</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        main {
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        textarea,
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #111;
+        }
+        #result {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AES 加密/解密</h1>
+    </header>
+    <main>
+        <form id="aesForm">
+            <label for="mode">模式:</label>
+            <select id="mode" name="mode" required>
+                <option value="encrypt">加密</option>
+                <option value="decrypt">解密</option>
+            </select>
+            <label for="data">输入数据:</label>
+            <textarea id="data" name="data" required></textarea>
+            <label for="key">密钥:</label>
+            <input type="password" id="key" name="key" required>
+            <button type="submit">执行</button>
+        </form>
+        <div id="result"></div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="spa.js"></script>
+</body>
+</html>
