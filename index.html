@@ -2,39 +2,52 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>cryptotools</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 如果有样式表 -->
+    <title>AES 和 DES 加密/解密</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>加密工具</h1>
+        <h1>AES 和 DES 加密/解密</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#aes">AES 加密/解密</a></li>
-            <li><a href="#rsa">RSA 加密/解密</a></li>
-            <li><a href="#sha">SHA 加密</a></li>
-            <li><a href="#md5">MD5 加密</a></li>
-            <li><a href="#keccak">Keccak 加密</a></li>
-            <li><a href="#hmac">HMAC 加密</a></li>
-            <li><a href="#crc32">CRC32 加密</a></li>
-            <li><a href="#rabbit">Rabbit 加密/解密</a></li>
-            <li><a href="#rc4">RC4 加密/解密</a></li>
-            <li><a href="#des">DES 加密/解密</a></li>
-            <li><a href="#tripledes">TripleDes 加密/解密</a></li>
-            <li><a href="#24char_encryption">24字加密</a></li>
-            <li><a href="#jwt">JWT 解密</a></li>
-            <li><a href="#email_encoder">Email 地址加密</a></li>
-            <li><a href="#calculator">在线计算器</a></li>
-            <li><a href="#sm2">国密SM2 加密/解密</a></li>
-            <li><a href="#sm4">国密SM4 加密/解密</a></li>
-            <li><a href="#base64_hex_converter">Base64/Hex 转换</a></li>
-        </ul>
-    </nav>
-    <div id="content-container">
-        <p>请选择一个工具。</p>
-    </div>
-    <div id="result"></div>
-    <script src="spa.js"></script>
+    <main>
+        <div class="tab-container">
+            <button class="tab-button active" onclick="showTab('aes')">AES</button>
+            <button class="tab-button" onclick="showTab('des')">DES</button>
+        </div>
+
+        <div id="aes" class="tab-content active">
+            <form id="aesForm">
+                <label for="aesMode">模式:</label>
+                <select id="aesMode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="aesData">输入数据:</label>
+                <textarea id="aesData" name="data" required></textarea>
+                <label for="aesKey">密钥 (16 字符):</label>
+                <input type="password" id="aesKey" name="key" required minlength="16" maxlength="16">
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="des" class="tab-content">
+            <form id="desForm">
+                <label for="desMode">模式:</label>
+                <select id="desMode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="desData">输入数据:</label>
+                <textarea id="desData" name="data" required></textarea>
+                <label for="desKey">密钥 (8 字符):</label>
+                <input type="password" id="desKey" name="key" required minlength="8" maxlength="8">
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="result"></div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
