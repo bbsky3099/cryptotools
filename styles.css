@@ -42,8 +42,8 @@ input[type="email"] {
 }
 
 button {
-    background-color:  black;/* 默认背景色透明 */
-    color: white; /* 文字颜色为黑色 */
+    background-color: black; /* 默认背景色黑色 */
+    color: white; /* 文字颜色为白色 */
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -52,13 +52,27 @@ button {
 }
 
 button:hover {
-    background-color:blue;/* 鼠标悬停时背景色变为黑色 */
-    color:  white; /* 文字颜色变为白色 */
+    background-color: blue; /* 鼠标悬停时背景色变为蓝色 */
+    color: white; /* 文字颜色保持白色 */
 }
 
 #result {
+    max-width: 100%;
     padding: 20px;
-    text-align: center;
+   /* text-align: center;*/
+}
+
+#result pre {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    height: 20px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
 }
 
 .tab-container {
@@ -85,7 +99,7 @@ button:hover {
 }
 
 .tab-button.active {
-    /*background-color: #111;  激活状态背景色 */
+   /* background-color: #111;  激活状态背景色 */
 }
 
 .tab-content {
@@ -102,9 +116,10 @@ h2 {
     text-align: center;
     padding: 1em 0;
 }
-.footer{ 
-padding:10px 0; 
-border-top:1px solid #ddd; 
-text-indent:20px; 
-color:#666;
+
+.footer { 
+    padding: 10px 0; 
+    border-top: 1px solid #ddd; 
+    text-indent: 20px; 
+    color: #666;
 }
