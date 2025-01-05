@@ -1,0 +1,69 @@
+<header>
+    <h1>RSA 加密/解密</h1>
+</header>
+<main>
+    <form id="rsaForm">
+        <label for="mode">模式:</label>
+        <select id="mode" required>
+            <option value="generateKeys">生成公私钥</option>
+            <option value="encrypt">加密</option>
+            <option value="decrypt">解密</option>
+            <option value="sign">签名</option>
+            <option value="verify">验证签名</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="publicKey">公钥 (仅用于加密和验证):</label>
+        <textarea id="publicKey"></textarea>
+        <label for="privateKey">私钥 (仅用于解密和签名):</label>
+        <textarea id="privateKey"></textarea>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js"></script>
+<script>
+    document.getElementById('rsaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const mode = document.getElementById('mode').value;
+        const data = document.getElementById('data').value;
+        const publicKey = document.getElementById('publicKey').value;
+        const privateKey = document.getElementById('privateKey').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const jsEncrypt = new JSEncrypt({default_key_size: 2048});
+
+            if (mode === 'generateKeys') {
+                jsEncrypt.getKey();
+                const publicKey = jsEncrypt.getPublicKey();
+                const privateKey = jsEncrypt.getPrivateKey();
+                resultDiv.textContent = `公钥: ${publicKey}\n\n私钥: ${privateKey}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'encrypt') {
+                jsEncrypt.setPublicKey(publicKey);
+                const encryptedData = jsEncrypt.encrypt(data);
+                resultDiv.textContent = `加密后的数据: ${encryptedData}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'decrypt') {
+                jsEncrypt.setPrivateKey(privateKey);
+                const decryptedData = jsEncrypt.decrypt(data);
+                resultDiv.textContent = `解密后的数据: ${decryptedData}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'sign') {
+                jsEncrypt.setPrivateKey(privateKey);
+                const signature = jsEncrypt.sign(data, CryptoJS.SHA256, "sha256");
+                resultDiv.textContent = `签名: ${signature}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'verify') {
+                jsEncrypt.setPublicKey(publicKey);
+                const isVerified = jsEncrypt.verify(data, signature, CryptoJS.SHA256);
+                resultDiv.textContent = `验证结果: ${isVerified ? '成功' : '失败'}`;
+                resultDiv.style.color = isVerified ? 'green' : 'red';
+            }
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

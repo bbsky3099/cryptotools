@@ -1,0 +1,27 @@
+<header>
+    <h1>在线计算器</h1>
+</header>
+<main>
+    <form id="calculatorForm">
+        <label for="expression">表达式:</label>
+        <input type="text" id="expression" required>
+        <button type="submit">计算</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script>
+    document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const expression = document.getElementById('expression').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const result = eval(expression);
+            resultDiv.textContent = `结果: ${result}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

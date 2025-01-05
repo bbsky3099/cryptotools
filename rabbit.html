@@ -1,0 +1,44 @@
+<header>
+    <h1>Rabbit 加密/解密</h1>
+</header>
+<main>
+    <form id="rabbitForm">
+        <label for="mode">模式:</label>
+        <select id="mode" required>
+            <option value="encrypt">加密</option>
+            <option value="decrypt">解密</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="key">密钥:</label>
+        <input type="text" id="key" required>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    document.getElementById('rabbitForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const mode = document.getElementById('mode').value;
+        const data = document.getElementById('data').value;
+        const key = document.getElementById('key').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            if (mode === 'encrypt') {
+                const encryptedData = CryptoJS.Rabbit.encrypt(data, key).toString();
+                resultDiv.textContent = `加密后的数据: ${encryptedData}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'decrypt') {
+                const decryptedBytes = CryptoJS.Rabbit.decrypt(data, key);
+                const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8);
+                resultDiv.textContent = `解密后的数据: ${decryptedData}`;
+                resultDiv.style.color = 'green';
+            }
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

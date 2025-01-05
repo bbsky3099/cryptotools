@@ -1,0 +1,27 @@
+<header>
+    <h1>Email 地址加密</h1>
+</header>
+<main>
+    <form id="emailForm">
+        <label for="email">Email 地址:</label>
+        <input type="email" id="email" required>
+        <button type="submit">加密</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script>
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const encodedEmail = email.split('').map(char => `&#${char.charCodeAt(0)};`).join('');
+            resultDiv.textContent = `加密后的数据: ${encodedEmail}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

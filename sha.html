@@ -1,0 +1,48 @@
+<header>
+    <h1>SHA 加密</h1>
+</header>
+<main>
+    <form id="shaForm">
+        <label for="algorithm">算法:</label>
+        <select id="algorithm" required>
+            <option value="SHA-1">SHA-1</option>
+            <option value="SHA-256">SHA-256</option>
+            <option value="SHA-512">SHA-512</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    document.getElementById('shaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const algorithm = document.getElementById('algorithm').value;
+        const data = document.getElementById('data').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            let hash;
+            switch (algorithm) {
+                case 'SHA-1':
+                    hash = CryptoJS.SHA1(data).toString();
+                    break;
+                case 'SHA-256':
+                    hash = CryptoJS.SHA256(data).toString();
+                    break;
+                case 'SHA-512':
+                    hash = CryptoJS.SHA512(data).toString();
+                    break;
+                default:
+                    throw new Error('未知的哈希算法');
+            }
+            resultDiv.textContent = `${algorithm} 哈希值: ${hash}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

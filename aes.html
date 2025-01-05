@@ -1,0 +1,19 @@
+<header>
+    <h1>AES 加密/解密</h1>
+</header>
+<main>
+    <form id="aesForm">
+        <label for="mode">模式:</label>
+        <select id="mode" required>
+            <option value="encrypt">加密</option>
+            <option value="decrypt">解密</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="key">密钥:</label>
+        <input type="text" id="key" required>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>

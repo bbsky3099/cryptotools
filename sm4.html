@@ -1,0 +1,43 @@
+<header>
+    <h1>国密SM4 加密/解密</h1>
+</header>
+<main>
+    <form id="sm4Form">
+        <label for="mode">模式:</label>
+        <select id="mode" required>
+            <option value="encrypt">加密</option>
+            <option value="decrypt">解密</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="key">密钥 (16字节):</label>
+        <input type="text" id="key" required maxlength="16">
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gm-crypto/1.0.1/gmcrypto.min.js"></script>
+<script>
+    document.getElementById('sm4Form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const mode = document.getElementById('mode').value;
+        const data = document.getElementById('data').value;
+        const key = document.getElementById('key').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            if (mode === 'encrypt') {
+                const encryptedData = await gm.SM4.doEncrypt(data, key);
+                resultDiv.textContent = `加密后的数据: ${encryptedData}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'decrypt') {
+                const decryptedData = await gm.SM4.doDecrypt(data, key);
+                resultDiv.textContent = `解密后的数据: ${decryptedData}`;
+                resultDiv.style.color = 'green';
+            }
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

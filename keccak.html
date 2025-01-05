@@ -1,0 +1,28 @@
+<header>
+    <h1>Keccak 加密</h1>
+</header>
+<main>
+    <form id="keccakForm">
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    document.getElementById('keccakForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const data = document.getElementById('data').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const hash = CryptoJS.SHA3(data).toString();
+            resultDiv.textContent = `Keccak 哈希值: ${hash}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

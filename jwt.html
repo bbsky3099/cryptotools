@@ -1,0 +1,27 @@
+<header>
+    <h1>JWT 解密</h1>
+</header>
+<main>
+    <form id="jwtForm">
+        <label for="token">JWT Token:</label>
+        <textarea id="token" required></textarea>
+        <button type="submit">解密</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script>
+    document.getElementById('jwtForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const token = document.getElementById('token').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            resultDiv.textContent = `解码后的数据: ${JSON.stringify(decodedToken, null, 2)}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

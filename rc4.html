@@ -1,0 +1,44 @@
+<header>
+    <h1>RC4 加密/解密</h1>
+</header>
+<main>
+    <form id="rc4Form">
+        <label for="mode">模式:</label>
+        <select id="mode" required>
+            <option value="encrypt">加密</option>
+            <option value="decrypt">解密</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="key">密钥:</label>
+        <input type="text" id="key" required>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rc4/1997.10.13/rc4.min.js"></script>
+<script>
+    document.getElementById('rc4Form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const mode = document.getElementById('mode').value;
+        const data = document.getElementById('data').value;
+        const key = document.getElementById('key').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const rc4 = new RC4(key);
+            if (mode === 'encrypt') {
+                const encryptedData = rc4.encrypt(data);
+                resultDiv.textContent = `加密后的数据: ${encryptedData}`;
+                resultDiv.style.color = 'green';
+            } else if (mode === 'decrypt') {
+                const decryptedData = rc4.decrypt(data);
+                resultDiv.textContent = `解密后的数据: ${decryptedData}`;
+                resultDiv.style.color = 'green';
+            }
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>

@@ -1,0 +1,45 @@
+<header>
+    <h1>HMAC 加密</h1>
+</header>
+<main>
+    <form id="hmacForm">
+        <label for="algorithm">算法:</label>
+        <select id="algorithm" required>
+            <option value="SHA-1">SHA-1</option>
+            <option value="SHA-256">SHA-256</option>
+            <option value="SHA-512">SHA-512</option>
+        </select>
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <label for="key">密钥:</label>
+        <input type="text" id="key" required>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    document.getElementById('hmacForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const algorithm = document.getElementById('algorithm').value;
+        const data = document.getElementById('data').value;
+        const key = document.getElementById('key').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            let hmac;
+            switch (algorithm) {
+                case 'SHA-1':
+                    hmac = CryptoJS.HmacSHA1(data, key).toString();
+                    break;
+                case 'SHA-256':
+                    hmac = CryptoJS.HmacSHA256(data, key).toString();
+                    break;
+                case 'SHA-512':
+                    hmac = CryptoJS.HmacSHA512(data, key).toString();
+                    break;
+                default:
+                    throw new Error('未知的哈希算法');
+            }
+            resultDiv.textContent = `${algorithm} HMAC 值: ${hmac}`;
+            resultDiv.style.color = 'green'; 

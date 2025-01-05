@@ -1,0 +1,28 @@
+<header>
+    <h1>CRC32 加密</h1>
+</header>
+<main>
+    <form id="crc32Form">
+        <label for="data">输入数据:</label>
+        <textarea id="data" required></textarea>
+        <button type="submit">执行</button>
+    </form>
+    <div id="result"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako_inflate.min.js"></script>
+<script>
+    document.getElementById('crc32Form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const data = document.getElementById('data').value;
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            const crc32Value = pako.crc32(data).toString(16);
+            resultDiv.textContent = `CRC32 值: ${crc32Value}`;
+            resultDiv.style.color = 'green';
+        } catch (error) {
+            resultDiv.textContent = `错误: ${error.message}`;
+            resultDiv.style.color = 'red';
+        }
+    });
+</script>
