@@ -4,15 +4,18 @@ body {
     padding: 0;
     background-color: #f4f4f9;
 }
+
 header {
-    background-color: #333;
+    background-color: green;
     color: white;
     text-align: center;
     padding: 1em 0;
 }
+
 main {
-    padding: 20px;
+    padding: 1em 0;
 }
+
 form {
     max-width: 400px;
     margin: auto;
@@ -21,52 +24,87 @@ form {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 label {
     display: block;
     margin-bottom: 5px;
 }
+
 textarea,
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 button {
-    background-color: #333;
-    color: white;
+    background-color:  black;/* 默认背景色透明 */
+    color: white; /* 文字颜色为黑色 */
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
 }
+
 button:hover {
-    background-color: #111;
+    background-color:blue;/* 鼠标悬停时背景色变为黑色 */
+    color:  white; /* 文字颜色变为白色 */
 }
+
 #result {
     padding: 20px;
     text-align: center;
 }
+
 .tab-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-bottom: 5px;
+    background-color: black; 
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
 }
+
 .tab-button {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
+    background-color: transparent; /* 默认背景色透明 */
+    color: white; /* 文字颜色为白色 */
+    padding: 10px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
 }
+
 .tab-button.active {
-    background-color: #111;
+    /*background-color: #111;  激活状态背景色 */
 }
+
 .tab-content {
     display: none;
 }
+
 .tab-content.active {
     display: block;
+}
+
+h2 {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+.footer{ 
+padding:10px 0; 
+border-top:1px solid #ddd; 
+text-indent:20px; 
+color:#666;
 }

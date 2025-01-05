@@ -2,18 +2,38 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>AES 和 DES 加密/解密</title>
+    <title>cryptotool box</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>AES 和 DES 加密/解密</h1>
+        <h1>多算法加密/解密在线计算器</h1>
+
     </header>
     <main>
         <div class="tab-container">
-            <button class="tab-button active" onclick="showTab('aes')">AES</button>
-            <button class="tab-button" onclick="showTab('des')">DES</button>
+            <button class="tab-button active" onclick="showTab('aes')">AES加/解密</button>
+            <button class="tab-button" onclick="showTab('des')">DES加/解密</button>
+            <button class="tab-button" onclick="showTab('rsa')">RSA加/解密</button>
+            <button class="tab-button" onclick="showTab('crc32')">CRC32计算</button>
+            <button class="tab-button" onclick="showTab('rc4')">RC4加/解密</button>
+            <button class="tab-button" onclick="showTab('tripledes')">TripleDES加/解密</button>
+            <button class="tab-button" onclick="showTab('jwt')">JWT解密</button>
+            <button class="tab-button" onclick="showTab('base64hex')">Base64/Hex转换</button>
+            <button class="tab-button" onclick="showTab('rabbit')">Rabbit加/解密</button>
+            <button class="tab-button" onclick="showTab('sha')">SHA哈希计算</button>
+            <button class="tab-button" onclick="showTab('keccak')">Keccak哈希计算</button>
+            <button class="tab-button" onclick="showTab('hmac')">HMAC计算</button>
+            <button class="tab-button" onclick="showTab('24char')">24字加密</button>
+            <button class="tab-button" onclick="showTab('sm2')">SM2加/解密</button>
+            <button class="tab-button" onclick="showTab('sm4')">SM4加/解密</button>
+            <button class="tab-button" onclick="showTab('emailEncrypt')">Email地址加密</button>
+            <button class="tab-button" onclick="showTab('md5')">MD5加密</button>
+            <button class="tab-button" onclick="showTab('calculator')">在线计算器</button>
         </div>
+
+
+        <h2 id="currentFunction">AES加/解密</h2>
 
         <div id="aes" class="tab-content active">
             <form id="aesForm">
@@ -45,9 +65,230 @@
             </form>
         </div>
 
+        <div id="rsa" class="tab-content">
+            <form id="rsaForm">
+                <label for="rsaMode">模式:</label>
+                <select id="rsaMode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="rsaData">输入数据:</label>
+                <textarea id="rsaData" name="data" required></textarea>
+                <label for="rsaKey">公钥/私钥:</label>
+                <textarea id="rsaKey" name="key" required></textarea>
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="crc32" class="tab-content">
+            <form id="crc32Form">
+                <label for="crc32Data">输入数据:</label>
+                <textarea id="crc32Data" name="data" required></textarea>
+                <button type="submit">计算 CRC32</button>
+            </form>
+        </div>
+
+        <div id="rc4" class="tab-content">
+            <form id="rc4Form">
+                <label for="rc4Mode">模式:</label>
+                <select id="rc4Mode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="rc4Data">输入数据:</label>
+                <textarea id="rc4Data" name="data" required></textarea>
+                <label for="rc4Key">密钥:</label>
+                <input type="password" id="rc4Key" name="key" required>
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="tripledes" class="tab-content">
+            <form id="tripledesForm">
+                <label for="tripledesMode">模式:</label>
+                <select id="tripledesMode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="tripledesData">输入数据:</label>
+                <textarea id="tripledesData" name="data" required></textarea>
+                <label for="tripledesKey">密钥 (24 字符):</label>
+                <input type="password" id="tripledesKey" name="key" required minlength="24" maxlength="24">
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="jwt" class="tab-content">
+            <form id="jwtForm">
+                <label for="jwtToken">JWT Token:</label>
+                <textarea id="jwtToken" name="token" required></textarea>
+                <label for="jwtSecret">密钥:</label>
+                <input type="password" id="jwtSecret" name="secret" required>
+                <button type="submit">解密 JWT</button>
+            </form>
+        </div>
+
+        <div id="base64hex" class="tab-content">
+            <form id="base64hexForm">
+                <label for="base64hexInput">输入数据:</label>
+                <textarea id="base64hexInput" name="input" required></textarea>
+                <label for="base64hexType">转换类型:</label>
+                <select id="base64hexType" name="type" required>
+                    <option value="toBase64">转 Base64</option>
+                    <option value="toHex">转 Hex</option>
+                </select>
+                <button type="submit">转换</button>
+            </form>
+        </div>
+
+        <div id="rabbit" class="tab-content">
+            <form id="rabbitForm">
+                <label for="rabbitMode">模式:</label>
+                <select id="rabbitMode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="rabbitData">输入数据:</label>
+                <textarea id="rabbitData" name="data" required></textarea>
+                <label for="rabbitKey">密钥:</label>
+                <input type="password" id="rabbitKey" name="key" required>
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="sha" class="tab-content">
+            <form id="shaForm">
+                <label for="shaAlgorithm">算法:</label>
+                <select id="shaAlgorithm" name="algorithm" required>
+                    <option value="SHA-1">SHA-1</option>
+                    <option value="SHA-256">SHA-256</option>
+                    <option value="SHA-512">SHA-512</option>
+                </select>
+                <label for="shaData">输入数据:</label>
+                <textarea id="shaData" name="data" required></textarea>
+                <button type="submit">计算哈希</button>
+            </form>
+        </div>
+
+        <div id="keccak" class="tab-content">
+            <form id="keccakForm">
+                <label for="keccakAlgorithm">算法:</label>
+                <select id="keccakAlgorithm" name="algorithm" required>
+                    <option value="KECCAK-224">KECCAK-224</option>
+                    <option value="KECCAK-256">KECCAK-256</option>
+                    <option value="KECCAK-384">KECCAK-384</option>
+                    <option value="KECCAK-512">KECCAK-512</option>
+                </select>
+                <label for="keccakData">输入数据:</label>
+                <textarea id="keccakData" name="data" required></textarea>
+                <button type="submit">计算哈希</button>
+            </form>
+        </div>
+
+        <div id="hmac" class="tab-content">
+            <form id="hmacForm">
+                <label for="hmacAlgorithm">算法:</label>
+                <select id="hmacAlgorithm" name="algorithm" required>
+                    <option value="SHA-1">SHA-1</option>
+                    <option value="SHA-256">SHA-256</option>
+                    <option value="SHA-512">SHA-512</option>
+                </select>
+                <label for="hmacData">输入数据:</label>
+                <textarea id="hmacData" name="data" required></textarea>
+                <label for="hmacKey">密钥:</label>
+                <input type="password" id="hmacKey" name="key" required>
+                <button type="submit">计算 HMAC</button>
+            </form>
+        </div>
+
+        <div id="24char" class="tab-content">
+            <form id="24charForm">
+                <label for="24charData">输入数据:</label>
+                <textarea id="24charData" name="data" required></textarea>
+                <button type="submit">执行 24 字加密</button>
+            </form>
+        </div>
+
+        <div id="sm2" class="tab-content">
+            <form id="sm2Form">
+                <label for="sm2Mode">模式:</label>
+                <select id="sm2Mode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="sm2Data">输入数据:</label>
+                <textarea id="sm2Data" name="data" required></textarea>
+                <label for="sm2PublicKey">公钥:</label>
+                <textarea id="sm2PublicKey" name="publicKey"></textarea>
+                <label for="sm2PrivateKey">私钥:</label>
+                <textarea id="sm2PrivateKey" name="privateKey"></textarea>
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="sm4" class="tab-content">
+            <form id="sm4Form">
+                <label for="sm4Mode">模式:</label>
+                <select id="sm4Mode" name="mode" required>
+                    <option value="encrypt">加密</option>
+                    <option value="decrypt">解密</option>
+                </select>
+                <label for="sm4Data">输入数据:</label>
+                <textarea id="sm4Data" name="data" required></textarea>
+                <label for="sm4Key">密钥 (16 字符):</label>
+                <input type="password" id="sm4Key" name="key" required minlength="16" maxlength="16">
+                <button type="submit">执行</button>
+            </form>
+        </div>
+
+        <div id="emailEncrypt" class="tab-content">
+            <form id="emailEncryptForm">
+                <label for="emailAddress">电子邮件地址:</label>
+                <input type="email" id="emailAddress" name="email" required>
+                <label for="emailKey">密钥:</label>
+                <input type="password" id="emailKey" name="key" required>
+                <button type="submit">加密 Email</button>
+            </form>
+        </div>
+
+        <div id="md5" class="tab-content">
+            <form id="md5Form">
+                <label for="md5Data">输入数据:</label>
+                <textarea id="md5Data" name="data" required></textarea>
+                <button type="submit">计算 MD5</button>
+            </form>
+        </div>
+
+        <div id="calculator" class="tab-content">
+            <form id="calculatorForm">
+                <label for="calculatorExpression">表达式:</label>
+                <input type="text" id="calculatorExpression" name="expression" required>
+                <button type="submit">计算</button>
+            </form>
+        </div>
+
         <div id="result"></div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.8.0/jsrsasign-all-min.js"></script>
     <script src="script.js"></script>
+  <!--footer-->
+			<div class="footer" style="text-align:center;">
+				<div>
+					<script id="ebsgovicon" src="http://szcert.ebs.org.cn/govicon.js?id=cd8d3c47-58ce-4507-bed6-1e636092774e&width=75&height=105&type=1"
+					type="text/javascript" charset="utf-8">
+					</script>
+				</div>
+				<br />
+				版权所有 @2022 - 2024 深圳市XXX科技有限公司
+				<a href="https://beian.miit.gov.cn/">
+					粤ICP备XXXXXXXX号
+				</a>
+				By
+				<a target="_blank" href="">
+					XXXXXX
+				</a>
+			</div>
+			<!--footer end-->
 </body>
 </html>
