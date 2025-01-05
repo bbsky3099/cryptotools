@@ -27,7 +27,7 @@ nav li {
     flex: 1 1 11.11%; /* 100% / 9 ≈ 11.11% */
     max-width: 11.11%;
     box-sizing: border-box;
-    margin: 5px 0; /* 设置上下边距以控制行间距 */
+    margin: 5px 0; /* 设置上下边距控制行间距 */
 }
 
 nav a {
