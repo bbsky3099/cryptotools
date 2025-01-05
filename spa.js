@@ -55,24 +55,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const resultDiv = event.target.querySelector('#result');
         
         try {
-            // Example handling for AES form
-            if (event.target.id === 'aesForm') {
-                const mode = formData.get('mode');
-                const data = formData.get('data');
-                const key = formData.get('key');
+            const formId = event.target.id;
+            switch (formId) {
+                case 'aesForm':
+                    const mode = formData.get('mode');
+                    const data = formData.get('data');
+                    const key = formData.get('key');
+                    
+                    if (mode === 'encrypt') {
+                        const encryptedData = CryptoJS.AES.encrypt(data, key).toString();
+                        resultDiv.textContent = `加密后的数据: ${encryptedData}`;
+                        resultDiv.style.color = 'green';
+                    } else if (mode === 'decrypt') {
+                        const decryptedBytes = CryptoJS.AES.decrypt(data, key);
+                        const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8);
+                        resultDiv.textContent = `解密后的数据: ${decryptedData}`;
+                        resultDiv.style.color = 'green';
+                    }
+                    break;
                 
-                if (mode === 'encrypt') {
-                    const encryptedData = CryptoJS.AES.encrypt(data, key).toString();
-                    resultDiv.textContent = `加密后的数据: ${encryptedData}`;
-                    resultDiv.style.color = 'green';
-                } else if (mode === 'decrypt') {
-                    const decryptedBytes = CryptoJS.AES.decrypt(data, key);
-                    const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8);
-                    resultDiv.textContent = `解密后的数据: ${decryptedData}`;
-                    resultDiv.style.color = 'green';
-                }
+                case 'rsaForm':
+                    // Add RSA encryption/decryption logic here
+                    break;
+                
+                case 'shaForm':
+                    // Add SHA encryption logic here
+                    break;
+                
+                // Add more cases for other forms as needed
+                default:
+                    resultDiv.textContent = `未知的表单类型: ${formId}`;
+                    resultDiv.style.color = 'red';
             }
-            // Add more form handlers as needed
         } catch (error) {
             resultDiv.textContent = `错误: ${error.message}`;
             resultDiv.style.color = 'red';
