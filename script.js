@@ -282,6 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showTab(tabName) {
+    document.getElementById('resultText').textContent = ` `;	
     const tabContent = document.getElementsByClassName('tab-content');
     for (let i = 0; i < tabContent.length; i++) {
         tabContent[i].style.display = 'none';
