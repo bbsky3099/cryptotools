@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 24px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Current Time (UTC)</h1>
+    <p id="current-time">Loading...</p>
+
+    <script>
+        function updateCurrentTime() {
+            const now = new Date();
+            const utcString = now.toUTCString();
+            document.getElementById('current-time').innerText = utcString;
+        }
+
+        // 初始加载时更新时间
+        updateCurrentTime();
+
+        // 每秒更新一次时间
+        setInterval(updateCurrentTime, 1000);
+    </script>
+</body>
+</html>
